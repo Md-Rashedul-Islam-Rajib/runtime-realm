@@ -12,7 +12,8 @@ const userSchema = new Schema<TUser>(
         
         email: {
                 type: String,
-                required: true
+            required: true,
+                unique: true
         },
         password: {
             type: String,
@@ -52,8 +53,8 @@ userSchema.post('save', function (doc, next) {
   next();
 });
 
-userSchema.statics.isUserExists = async function (id: string) {
-  return await UserModel.findOne({_id:id }).select('+password');
+userSchema.statics.isUserExists = async function (email: string) {
+  return await UserModel.findOne({email }).select('+password');
 };
 
 userSchema.statics.isPasswordMatched = async function (
