@@ -24,13 +24,15 @@ export interface ParserError {
   body: string;
   type: string;
 }
-
 export interface ValidationErrorResponse {
   message: string;
   success: boolean;
   error: {
-    name: string;
-    errors: Record<string, mongoose.Error.ValidatorError>;
+    details: {
+      name: string;
+      errors: Record<string, mongoose.Error.ValidatorError>;
+    };
   };
   stack?: string;
 }
+

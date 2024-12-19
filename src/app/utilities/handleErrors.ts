@@ -1,22 +1,25 @@
 import mongoose, { MongooseError } from 'mongoose';
-import { Request, Response, NextFunction } from 'express';
-import { ValidationErrorResponse } from './error.type';
+import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
+import { ValidationErrorResponse } from '../types/error.types';
 
-export const handleErrors = (
-  err: unknown,
-  _req: Request,
-  res: Response,
-  _next: NextFunction,
+export const handleErrors : ErrorRequestHandler = (
+  err,
+  _req,
+  res,
+  _next,
 ) => {
   // handling mongoose errors
   if (err instanceof mongoose.Error.ValidationError) {
-    return res.status(400).json({
-      message: 'Validation failed',
-      success: false,
+     res.status(400).json({
+         success: false,
+         message: 'Validation failed',
+      statusCode : 400,
       error: {
-        name: err.name,
-        errors: err.errors,
+          details: {
+              name: err.name,
+              errors: err.errors
+          }
       },
       stack: err.stack,
     } as ValidationErrorResponse);
@@ -25,9 +28,10 @@ export const handleErrors = (
   // handling cast errors
   if (err instanceof MongooseError) {
     if (err?.name === 'CastError') {
-      return res.status(400).json({
-        message: 'Invalid ObjectId',
-        success: false,
+       res.status(400).json({
+           success: false,
+           message: 'Invalid ObjectId',
+        statusCode:400,
         error: {
           name: err.name,
           errors: err,
@@ -38,9 +42,10 @@ export const handleErrors = (
   }
   // handling zod validation errors
   if (err instanceof ZodError) {
-    return res.status(400).json({
-      message: err.name,
-      success: false,
+     res.status(400).json({
+         success: false,
+         message: err.name,
+         statusCode : 400,
       error: {
         name: err.name,
         errors: err.errors || err.issues,
@@ -51,17 +56,20 @@ export const handleErrors = (
 
   // handling all other errors except zod and mongoose
   if (err instanceof Error) {
-    return res.status(500).json({
-      message: 'Something went wrong',
-      success: false,
+     res.status(500).json({
+         success: false,
+         message: 'Something went wrong',
+         statusCode: 400,
       error: err.message,
       stack: err.stack,
     });
-  }
+    }
+    
   // handling unknown errors
-  return res.status(500).json({
-    message: 'Unknown error occurs',
-    success: false,
+  res.status(500).json({
+      success: false,
+      message: 'Unknown error occurs',
+    statusCode : 400,
     error: JSON.stringify(err),
   });
 };
