@@ -8,4 +8,10 @@ export class BlogController {
         const data = { result };
         sendResponse(res, 201,true,"Blog created successfully", data);
     });
+    
+    static updateBlog = catchAsync(async (req, res) => { 
+        const result = await BlogServices.updateBlog(req.params.id, req.body);
+        const data = { result };
+        sendResponse(res, 200,true,"Blog updated successfully", data);
+    });
 }
