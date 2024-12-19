@@ -5,3 +5,4 @@ export type TBlogs = {
     content: string;
     author: Types.ObjectId;
 }
+
