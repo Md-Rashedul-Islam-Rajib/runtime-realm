@@ -1,0 +1,10 @@
+import { Router } from "express";
+import validateRequest from "../../middlewares/validateRequest";
+import { userCreationSchema } from "../user/user.validation";
+import { AuthControllers } from "./auth.controller";
+
+const AuthRouter: Router = Router();
+
+AuthRouter.post('/auth/register',validateRequest(userCreationSchema),AuthControllers.registerUser);
+
+export default AuthRouter;
