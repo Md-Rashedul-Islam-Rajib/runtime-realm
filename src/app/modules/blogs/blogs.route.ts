@@ -9,4 +9,6 @@ BlogRouter.post('/',validateRequest(blogCreationSchema), BlogController.createBl
 
 BlogRouter.patch('/:id',validateRequest(blogUpdateSchema), BlogController.updateBlog);
 
+BlogRouter.delete('/:id', BlogController.deleteBlog);
+
 export default BlogRouter;
