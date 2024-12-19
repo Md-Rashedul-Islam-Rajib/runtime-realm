@@ -14,4 +14,9 @@ export class BlogController {
         const data = { result };
         sendResponse(res, 200,true,"Blog updated successfully", data);
     });
+
+    static deleteBlog = catchAsync(async (req, res) => { 
+        await BlogServices.deleteBlog(req.params.id);
+        sendResponse(res, 200,true,"Blog deleted successfully");
+    });
 }
