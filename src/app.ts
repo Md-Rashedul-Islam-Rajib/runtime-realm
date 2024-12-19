@@ -1,8 +1,7 @@
 import express, { Application, Request, Response } from 'express';
-
-import { handleErrors } from './app/utilities/globalErrorHandler';
 import cookieParser from 'cookie-parser';
 import router from './app/routes';
+import { handleErrors } from './app/utilities/handleErrors';
 
 const app: Application = express();
 
