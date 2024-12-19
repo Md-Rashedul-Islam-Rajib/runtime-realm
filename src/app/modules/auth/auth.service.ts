@@ -1,4 +1,4 @@
-import { jwt } from 'jsonwebtoken';
+
 import { StatusFullError } from "../../class/statusFullError";
 import { UserModel } from "../user/user.model";
 import { TUser } from "../user/user.types";
