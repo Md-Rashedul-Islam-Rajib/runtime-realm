@@ -3,5 +3,5 @@ export type TUser = {
     email: string,
     password: string,
     role: 'admin' | 'user',
-    isBlocked: boolean,
+    isBlocked?: boolean,
 }
