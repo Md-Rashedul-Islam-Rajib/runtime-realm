@@ -13,7 +13,7 @@ export const handleErrors : ErrorRequestHandler = (
   if (err instanceof mongoose.Error.ValidationError) {
      res.status(400).json({
          success: false,
-         message: 'Validation failed',
+         message: err.message ||'Validation failed',
       statusCode : 400,
       error: {
           details: {

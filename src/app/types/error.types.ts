@@ -25,8 +25,8 @@ export interface ParserError {
   type: string;
 }
 export interface ValidationErrorResponse {
-  message: string;
   success: boolean;
+  message: string;
   error: {
     details: {
       name: string;
