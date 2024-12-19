@@ -1,7 +1,10 @@
+import { jwt } from 'jsonwebtoken';
+import { StatusFullError } from "../../class/statusFullError";
 import { UserModel } from "../user/user.model";
 import { TUser } from "../user/user.types";
 import { TLoginUser } from "./auth.types";
-import { preValidatingUser } from "./auth.utilities";
+import { createToken, preValidatingUser } from "./auth.utilities";
+import config from '../../config';
 
 export class AuthServices {
     static async registerUser( payload: TUser ) { 
@@ -22,8 +25,30 @@ export class AuthServices {
         );
         
         if (!isPasswordCorrect) {
-            throw new Error('password is incorrect');
+            throw new StatusFullError("AuthenticationError","Password is incorrect",true, 401);
         }
+
+        const jwtPayload = {
+            email: user.email,
+            role: user.role,
+        };
+
+        const accessToken = createToken(
+            jwtPayload,
+            config.jwt_access_secret,
+            config.jwt_access_expires_in
+        );
+
+        const refreshToken = createToken(
+          jwtPayload,
+          config.jwt_refresh_secret,
+          config.jwt_refresh_expires_in,
+        );
+
+        return {
+          accessToken,
+          refreshToken,
+        };
 
     }
 }
