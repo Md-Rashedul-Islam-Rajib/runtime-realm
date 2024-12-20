@@ -22,4 +22,10 @@ export class AdminControllers {
     const data = { token: accessToken };
     sendResponse(res, 200, true, 'Login successful', data);
   });
+
+    
+    static blockUser = catchAsync(async (req, res) => {
+       await AdminServices.blockUser(req.params.id, req.body);
+        sendResponse(res,200,true,"User blocked successfully");
+    });
 }
