@@ -1,5 +1,5 @@
 export type TAdmin = {
-    name: string;
-    email: string;
-    password: string
+    name: "runtime-admin";
+    email: "runtime-admin@realm.com";
+    password: "runtime_realm"
 }
