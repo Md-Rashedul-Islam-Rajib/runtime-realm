@@ -9,6 +9,8 @@ const BlogRouter: Router = Router();
 
 BlogRouter.post('/',auth(USER_ROLE.user),validateRequest(blogCreationSchema), BlogController.createBlog);
 
+BlogRouter.get('/',BlogController.getAllBlogs);
+
 BlogRouter.patch('/:id',auth(USER_ROLE.user),validateRequest(blogUpdateSchema), BlogController.updateBlog);
 
 BlogRouter.delete('/:id',auth(USER_ROLE.user), BlogController.deleteBlog);
