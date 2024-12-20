@@ -25,7 +25,12 @@ export class AdminControllers {
 
     
     static blockUser = catchAsync(async (req, res) => {
-       await AdminServices.blockUser(req.params.id, req.body);
+       await AdminServices.blockUser(req.params.userId, req.body);
         sendResponse(res,200,true,"User blocked successfully");
+    });
+    
+    static delete = catchAsync(async (req, res) => { 
+        await AdminServices.deleteBlog(req.params.id, req.body);
+        sendResponse(res,200,true,"Blog deleted successfully");
     });
 }
