@@ -11,4 +11,6 @@ AdminRouter.post('/login', AdminControllers.loginAdmin);
 
 AdminRouter.patch('/user/:userId/block',auth(USER_ROLE.admin),AdminControllers.blockUser);
 
+AdminRouter.delete('/blogs/:id', auth(USER_ROLE.admin), AdminControllers.deleteBlog);
+
 export default AdminRouter;

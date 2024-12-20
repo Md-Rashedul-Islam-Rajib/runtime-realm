@@ -29,7 +29,7 @@ export class AdminControllers {
         sendResponse(res,200,true,"User blocked successfully");
     });
     
-    static delete = catchAsync(async (req, res) => { 
+    static deleteBlog = catchAsync(async (req, res) => { 
         await AdminServices.deleteBlog(req.params.id, req.body);
         sendResponse(res,200,true,"Blog deleted successfully");
     });
