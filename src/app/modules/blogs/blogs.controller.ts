@@ -7,6 +7,11 @@ export class BlogController {
         const data = await BlogServices.createBlog(req.body,req.user?.email);
         sendResponse(res, 201,true,"Blog created successfully", data);
     });
+
+    static getAllBlogs = catchAsync(async (req, res) => { 
+        const data = await BlogServices.getAllblogs(req.query);
+        sendResponse(res, 200, true, 'Blogs fetched successfully',data);
+    });
     
     static updateBlog = catchAsync(async (req, res) => { 
         const data = await BlogServices.updateBlog(req.params.id, req.body,req.user?.email);
