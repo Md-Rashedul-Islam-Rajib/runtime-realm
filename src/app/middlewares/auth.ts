@@ -3,10 +3,11 @@ import { TUserRole } from '../modules/user/user.types';
 import config from '../config';
 import catchAsync from '../utilities/catchAsync';
 import { preValidatingUser } from '../modules/auth/auth.utilities';
+import { CustomPayload } from '../..';
 
 const auth = (...roles: TUserRole[]) => {
   return catchAsync(async (req, _res, next) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split(" ")[0];
 
     // checking if the token is missing
     if (!token) {
@@ -17,11 +18,11 @@ const auth = (...roles: TUserRole[]) => {
     const decoded = jwt.verify(
       token,
       config.jwt_access_secret as string,
-    ) as JwtPayload;
+    ) as CustomPayload;
 
     const { email,role } = decoded;
     
-    const user = await preValidatingUser(email);
+   await preValidatingUser(email);
 
 
     if (roles && !roles.includes(role)) {
