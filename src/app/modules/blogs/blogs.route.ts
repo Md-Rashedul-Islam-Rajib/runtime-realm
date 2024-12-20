@@ -13,6 +13,6 @@ BlogRouter.get('/',BlogController.getAllBlogs);
 
 BlogRouter.patch('/:id',auth(USER_ROLE.user),validateRequest(blogUpdateSchema), BlogController.updateBlog);
 
-BlogRouter.delete('/:id',auth(USER_ROLE.user), BlogController.deleteBlog);
+BlogRouter.delete('/:id',auth(USER_ROLE.user),validateRequest(blogUpdateSchema), BlogController.deleteBlog);
 
 export default BlogRouter;

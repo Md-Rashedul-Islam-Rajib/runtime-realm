@@ -51,7 +51,7 @@ export class BlogServices {
         return result;
     }
     
-    static async deleteBlog(id: string,email?:string) {
+    static async deleteBlog(id: string,payload:Pick<TBlogs,"isDeleted"> ,email?:string) {
         if (!email) {
             throw new StatusFullError('AuthenticationError', 'author not found', true, 401);
         }
@@ -63,7 +63,7 @@ export class BlogServices {
         if (!isBlogExists) {
             throw new StatusFullError('NotFoundError', 'Blog not found', true, 404);
         };
-            const result = await BlogModel.findByIdAndDelete(id,{new:true});
+            const result = await BlogModel.findByIdAndUpdate(id,payload,{new:true,runValidators:true});
             return result;
     }
 }

@@ -7,5 +7,6 @@ export const blogCreationSchema = z.object({
 });
 export const blogUpdateSchema = z.object({
     title: z.string().optional(),
-    content: z.string().optional()
+    content: z.string().optional(),
+    isDeleted: z.boolean().optional()
 });

@@ -20,7 +20,7 @@ export class BlogController {
     });
 
     static deleteBlog = catchAsync(async (req, res) => { 
-        await BlogServices.deleteBlog(req.params.id,req.user?.email);
+        await BlogServices.deleteBlog(req.params.id,req.body,req.user?.email);
         sendResponse(res, 200,true,"Blog deleted successfully");
     });
 }

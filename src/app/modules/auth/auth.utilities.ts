@@ -23,8 +23,8 @@ export const verifyToken = (secret: string, token?: string) => {
   }
 };
 
-export const preValidatingUser = async (email: string) => {
-  const user = await UserModel.isUserExists(email);
+export const preValidatingUser = async (identifier: string) => {
+  const user = await UserModel.isUserExists(identifier);
   if (!user) {
     throw new Error('this user is not found');
   }
@@ -37,14 +37,6 @@ export const preValidatingUser = async (email: string) => {
     throw new Error('this user is blocked');
   }
 
-//   if (
-//     user.passwordChangedAt &&
-//     UserModel.isJWTIssuedBeforePasswordChanged(
-//       user.passwordChangedAt,
-//       iat as number,
-//     )
-//   ) {
-//     throw new Error('you are not authorized');
-//   }
+
   return user;
 };

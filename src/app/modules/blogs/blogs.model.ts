@@ -16,6 +16,11 @@ const blogSchema = new Schema<TBlogs>(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    isDeleted:{
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   {
     timestamps: true,
