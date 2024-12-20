@@ -17,7 +17,7 @@ export class AdminServices {
     }
     
     
-    static async loginUser(payload: TLoginUser) {
+    static async loginAdmin(payload: TLoginUser) {
             const admin = await preValidatingUser(payload.email);
     
             const isPasswordCorrect = await UserModel.isPasswordMatched(
