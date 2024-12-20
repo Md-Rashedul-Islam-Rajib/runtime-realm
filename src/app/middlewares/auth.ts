@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { TUserRole } from '../modules/user/user.types';
 import config from '../config';
 import catchAsync from '../utilities/catchAsync';
@@ -25,7 +25,7 @@ const auth = (...roles: TUserRole[]) => {
    await preValidatingUser(email);
 
 
-    if (roles && !roles.includes(role)) {
+    if (roles && !roles.includes(role as TUserRole)) {
       throw new Error('you are not authorized');
     }
 
