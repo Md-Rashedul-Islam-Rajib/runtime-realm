@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { TBlogs } from './blogs.types';
-import { UserModel } from '../user/user.model';
+
 
 const blogSchema = new Schema<TBlogs>(
   {
@@ -15,7 +15,6 @@ const blogSchema = new Schema<TBlogs>(
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
     },
   },
   {

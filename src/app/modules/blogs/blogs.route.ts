@@ -2,13 +2,15 @@ import { Router } from "express";
 import validateRequest from "../../middlewares/validateRequest";
 import { blogCreationSchema, blogUpdateSchema } from "./blogs.validation";
 import { BlogController } from "./blogs.controller";
+import auth from "../../middlewares/auth";
+import { USER_ROLE } from "../user/user.constant";
 
 const BlogRouter: Router = Router();
 
-BlogRouter.post('/',validateRequest(blogCreationSchema), BlogController.createBlog);
+BlogRouter.post('/',auth(USER_ROLE.user),validateRequest(blogCreationSchema), BlogController.createBlog);
 
-BlogRouter.patch('/:id',validateRequest(blogUpdateSchema), BlogController.updateBlog);
+BlogRouter.patch('/:id',auth(USER_ROLE.user),validateRequest(blogUpdateSchema), BlogController.updateBlog);
 
-BlogRouter.delete('/:id', BlogController.deleteBlog);
+BlogRouter.delete('/:id',auth(USER_ROLE.user), BlogController.deleteBlog);
 
 export default BlogRouter;

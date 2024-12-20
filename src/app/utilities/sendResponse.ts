@@ -19,12 +19,14 @@ const sendResponse = <T>(
     res.status(statusCode).json({
       success,
       message,
+      statusCode,
       data,
     });
   } else {
     res.status(statusCode).json({
       success,
       message,
+      statusCode
     });
   }
 };

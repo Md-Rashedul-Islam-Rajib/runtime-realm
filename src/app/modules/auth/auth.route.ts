@@ -5,6 +5,8 @@ import { AuthControllers } from "./auth.controller";
 
 const AuthRouter: Router = Router();
 
-AuthRouter.post('/register',validateRequest(userCreationSchema),AuthControllers.registerUser);
+AuthRouter.post('/register', validateRequest(userCreationSchema), AuthControllers.registerUser);
+
+AuthRouter.post('/login', AuthControllers.loginUser);
 
 export default AuthRouter;

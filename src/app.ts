@@ -4,7 +4,7 @@ import cors from 'cors';
 import router from './app/routes';
 import { handleErrors } from './app/utilities/handleErrors';
 
-import "./app/types/index.d";
+// import "./index.d";
 
 
 

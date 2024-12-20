@@ -10,13 +10,17 @@ export class AuthControllers {
 
   static loginUser = catchAsync(async (req, res) => {
     const result = await AuthServices.loginUser(req.body);
-    const { refreshToken, accessToken } = result;
 
+    const { refreshToken, accessToken } = result;
     res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+    });
+    res.cookie('accessToken', accessToken, {
       httpOnly: true,
     });
 
     const data = { token: accessToken };
-    sendResponse(res, 200, true, 'User logged in successfully', data);
+    sendResponse(res, 200, true, 'Login successful', data);
   });
 }
