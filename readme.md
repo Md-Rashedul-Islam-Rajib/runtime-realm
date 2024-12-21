@@ -40,7 +40,7 @@ Runtime Realm Server is a robust backend application built for managing blogs wi
 1. **User Authentication & Authorization:** Secure login with role-based access control (Admin, User).  
 2. **Role Management:** Admins can block users and manage all blogs, while users can manage their own content.  
 3. **JWT-Based Security:** Access and refresh tokens ensure secure session management.  
-4. **Middleware Protection:** Role-based access enforced through middleware (`authorizeUser`).  
+4. **Middleware Protection:** Role-based access enforced through middleware (`auth`).  
 5. **Blog Management:** Full CRUD operations for blogs, with ownership validation.  
 6. **Search, Sort & Filter:**  Efficient querying powered by a reusable `QueryBuilder` class, designed to support future module expansions.  
 7. **Password Encryption:** User passwords are securely hashed using **bcrypt**.  
@@ -446,7 +446,7 @@ All error responses follow a consistent structure:
 
 ## 📹 Project Overview Video
 
-- **[Project Demo Video Link](https://drive.google.com)**
+- **[Project Demo Video Link](https://drive.google.com/file/d/1qFIqThgPi2Ul3DetJ-yyypVDpCRLHSGC/view?usp=sharing)**
 
 ---
 
