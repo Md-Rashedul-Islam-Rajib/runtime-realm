@@ -1,4 +1,4 @@
-import { STATUS_CODES } from "../constants";
+import { STATUS_CODES } from '../constants';
 
 export type TErrorName =
   | 'ValidationError'

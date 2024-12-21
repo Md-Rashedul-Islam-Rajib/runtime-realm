@@ -3,23 +3,21 @@ import AuthRouter from '../modules/auth/auth.route';
 import BlogRouter from '../modules/blogs/blogs.route';
 import AdminRouter from '../modules/admin/admin.route';
 
-
 const router: Router = Router();
 
 const allRoutes = [
   {
     path: '/auth',
-    route : AuthRouter
+    route: AuthRouter,
   },
   {
     path: '/blogs',
-    route: BlogRouter
+    route: BlogRouter,
   },
   {
     path: '/admin',
-    route: AdminRouter
-  }
- 
+    route: AdminRouter,
+  },
 ];
 
 allRoutes.forEach((singleRoute) =>

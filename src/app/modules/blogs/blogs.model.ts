@@ -1,6 +1,5 @@
-import { model, Schema } from 'mongoose';
-import { TBlogs } from './blogs.types';
-
+import { model, Query, Schema } from 'mongoose';
+import { TBlogs, TBlogsDoc } from './blogs.types';
 
 const blogSchema = new Schema<TBlogs>(
   {
@@ -14,13 +13,13 @@ const blogSchema = new Schema<TBlogs>(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'user',
     },
-    isDeleted:{
+    isDeleted: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -28,6 +27,14 @@ const blogSchema = new Schema<TBlogs>(
   },
 );
 
+blogSchema.pre(/^find/, function (next) {
+  const query = this as Query<TBlogsDoc, TBlogsDoc>;
 
+  query
+    .find({ isDeleted: { $eq: false } })
+    .select('-createdAt -updatedAt')
+    .populate('author', 'name email');
+  next();
+});
 
 export const BlogModel = model<TBlogs>('Blog', blogSchema);

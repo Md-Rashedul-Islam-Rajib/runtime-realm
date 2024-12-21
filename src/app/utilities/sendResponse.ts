@@ -26,7 +26,7 @@ const sendResponse = <T>(
     res.status(statusCode).json({
       success,
       message,
-      statusCode
+      statusCode,
     });
   }
 };

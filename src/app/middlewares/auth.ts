@@ -7,7 +7,7 @@ import { CustomPayload } from '../..';
 
 const auth = (...roles: TUserRole[]) => {
   return catchAsync(async (req, _res, next) => {
-    const token = req.headers.authorization?.split(" ")[0];
+    const token = req.headers.authorization?.split(' ')[1];
 
     // checking if the token is missing
     if (!token) {
@@ -20,10 +20,9 @@ const auth = (...roles: TUserRole[]) => {
       config.jwt_access_secret as string,
     ) as CustomPayload;
 
-    const { email,role } = decoded;
-    
-   await preValidatingUser(email);
+    const { email, role } = decoded;
 
+    await preValidatingUser(email);
 
     if (roles && !roles.includes(role as TUserRole)) {
       throw new Error('you are not authorized');

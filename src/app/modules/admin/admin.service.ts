@@ -60,29 +60,46 @@ export class AdminServices {
       accessToken,
       refreshToken,
     };
-    }
-    
+  }
 
-    static async blockUser(id: string, payload: Pick<TUser, 'isBlocked'>) {
-        
-        const user = preValidatingUser(id);
-        if (!user) {
-            throw new StatusFullError('NotFoundError',"user is not found",false,400);
-        }
-        const result = await UserModel.findByIdAndUpdate(id, payload, { new: true });
-        return result;
+  static async blockUser(id: string, payload: Pick<TUser, 'isBlocked'>) {
+    const user = preValidatingUser(id);
+    if (!user) {
+      throw new StatusFullError(
+        'NotFoundError',
+        'user is not found',
+        false,
+        400,
+      );
     }
+    const result = await UserModel.findByIdAndUpdate(id, payload, {
+      new: true,
+    });
+    return result;
+  }
 
-    static async deleteBlog(id: string, payload: Pick<TBlogs, 'isDeleted'>) {
-        const isBlogExists = await BlogModel.findById(id);
-        if (!isBlogExists) {
-            throw new StatusFullError('NotFoundError', 'blog is not found', false, 400);
-        }
-        if (isBlogExists.isDeleted) {
-            throw new StatusFullError('ValidationError', 'blog is already deleted', false, 400);
-            
-        }
-        const result = await BlogModel.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
-        return result;
+  static async deleteBlog(id: string, payload: Pick<TBlogs, 'isDeleted'>) {
+    const isBlogExists = await BlogModel.findById(id);
+    if (!isBlogExists) {
+      throw new StatusFullError(
+        'NotFoundError',
+        'blog is not found',
+        false,
+        400,
+      );
     }
+    if (isBlogExists.isDeleted) {
+      throw new StatusFullError(
+        'ValidationError',
+        'blog is already deleted',
+        false,
+        400,
+      );
+    }
+    const result = await BlogModel.findByIdAndUpdate(id, payload, {
+      new: true,
+      runValidators: true,
+    });
+    return result;
+  }
 }

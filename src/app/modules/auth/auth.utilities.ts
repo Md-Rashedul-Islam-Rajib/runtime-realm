@@ -29,14 +29,13 @@ export const preValidatingUser = async (identifier: string) => {
     throw new Error('this user is not found');
   }
 
-//   if (user?.isDeleted) {
-//     throw new Error('this user is deleted');
-//   }
+  //   if (user?.isDeleted) {
+  //     throw new Error('this user is deleted');
+  //   }
 
   if (user.isBlocked) {
     throw new Error('this user is blocked');
   }
-
 
   return user;
 };
