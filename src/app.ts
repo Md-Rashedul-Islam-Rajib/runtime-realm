@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import router from './app/routes';
 import { handleErrors } from './app/utilities/handleErrors';
+import { notFound } from './app/middlewares/notFound';
 
 // import "./index.d";
 
@@ -18,4 +19,5 @@ app.get('/', (_req: Request, res: Response) => {
 });
 
 app.use(handleErrors);
+app.use(notFound);
 export default app;
